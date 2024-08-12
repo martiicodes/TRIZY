@@ -1,14 +1,16 @@
-{% for todo in todos %}
-    <div class="todo-item">
-        <h3>{{ todo.title }}</h3>
-        <p>{{ todo.description }}</p>
-        <a href="{% url 'todo_detail' todo.id %}">View</a>
-        <a href="{% url 'todo_edit' todo.id %}">Edit</a>
-        <a href="{% url 'todo_delete' todo.id %}">Delete</a>
-        {% if todo.children.all %}
-            <div class="todo-tree">
-                {% include 'todo_app/todo_tree.html' with todos=todo.children.all %}
+<ul class="todo-tree">
+    {% for todo in todos %}
+        <li>
+            <div class="todo-item">
+                <h3>{{ todo.title }}</h3>
+                <p>{{ todo.description }}</p>
+                <a href="{% url 'todo_detail' todo.id %}">View</a>
+                <a href="{% url 'todo_edit' todo.id %}">Edit</a>
+                <a href="{% url 'todo_delete' todo.id %}">Delete</a>
             </div>
-        {% endif %}
-    </div>
-{% endfor %}
+            {% if todo.children.all %}
+                {% include 'todo_app/todo_tree.html' with todos=todo.children.all %}
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>

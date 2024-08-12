@@ -3,13 +3,16 @@
 {% block content %}
     <h1>Todo List</h1>
     <div class="todo-info">
-        <p>Wake up time: {{ todos.0.wake_up_time|default:"Not set" }}</p>
-        <p>Day: {{ todos.0.day_of_week|default:"Not set" }}</p>
-        <p>Date: {{ todos.0.date|date:"Y-m-d" }}</p>
-        <p>Location: {{ todos.0.location|default:"Not set" }}</p>
+        <p>Date: {{ today|date:"Y-m-d" }}</p>
+        <p>Day: {{ today|date:"l" }}</p>
+        <form method="post" action="{% url 'update_info' %}">
+            {% csrf_token %}
+            <label for="wake_up_time">Wake up time:</label>
+            <input type="time" id="wake_up_time" name="wake_up_time" value="{{ wake_up_time }}">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="{{ location }}">
+            <button type="submit">Update</button>
+        </form>
     </div>
-    <a href="{% url 'todo_new' %}">Add New Todo</a>
-    <div class="todo-tree">
-        {% include 'todo_app/todo_tree.html' with todos=todos %}
-    </div>
-{% endblock %}
+    <a href="{% url 'export_todos' %}" class="btn btn-primary">Export Today's Todos</a>
+    {% endblock content %}
