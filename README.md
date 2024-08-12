@@ -1,7 +1,7 @@
 # TRIZY
 
 Trizy is a web app project. 
-Idea: tree/graph structure todo web app.
+Tree/graph hierarchical structure todo web app.
 
 Features:
 
