@@ -1,0 +1,15 @@
+{% extends 'todo_app/base.html' %}
+
+{% block content %}
+    <h1>Todo List</h1>
+    <div class="todo-info">
+        <p>Wake up time: {{ todos.0.wake_up_time|default:"Not set" }}</p>
+        <p>Day: {{ todos.0.day_of_week|default:"Not set" }}</p>
+        <p>Date: {{ todos.0.date|date:"Y-m-d" }}</p>
+        <p>Location: {{ todos.0.location|default:"Not set" }}</p>
+    </div>
+    <a href="{% url 'todo_new' %}">Add New Todo</a>
+    <div class="todo-tree">
+        {% include 'todo_app/todo_tree.html' with todos=todos %}
+    </div>
+{% endblock %}
